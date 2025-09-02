@@ -1,0 +1,462 @@
+// Farxod Qarshiyev 220090
+// Tuesday 14:00
+// Mobile Programming Programming Lab Week 2
+
+// Q1
+#include <iostream>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+  cout << "Number of arguments received: " << argc << endl;
+  cout << "Arguments are:" << endl;
+
+  for (int i = 0; i < argc; ++i)
+  {
+    cout << "Argument " << i << ": " << argv[i] << endl;
+  }
+
+  return 0;
+}
+
+// Q2
+// In C++, main is the entry point where execution begins. learned this in class
+
+// Q3
+// In JAVA it returns nothing (void) and always public static, while in C++ returns an integer exit code
+
+// Q4
+// In C++, 0 means success non zero is error. System.exit(code) - used in JAVA to signal exit codes. not sure about this one
+
+// VARIABLES
+// Q1
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int a = 10, b = 20;
+
+  cout << "Before swap: a = " << a << ", b = " << b << endl;
+
+  a = a + b;
+  b = a - b;
+  a = a - b;
+
+  cout << "After swap: a = " << a << ", b = " << b << endl;
+  return 0;
+}
+
+// Q2
+// primitive store actual values, reference ones store memory addresses. need to study this more
+
+// Q3
+// local scope variable exists only in block or function, classic/static exists across all objects. got this from lecture
+
+// Q4
+// types checked at compile time
+
+// CONTROL FLOW
+
+// Q1
+#include <iostream>
+using namespace std;
+
+int main()
+{
+  int n1 = 0, n2 = 1, nextTerm;
+  cout << "First 10 Fibonacci numbers: ";
+  // using for loop to generate fibonacci sequence
+
+  for (int i = 1; i <= 10; ++i)
+  {
+    if (i == 1)
+    {
+      cout << n1 << " ";
+      continue;
+    }
+    if (i == 2)
+    {
+      cout << n2 << " ";
+      continue;
+    }
+    nextTerm = n1 + n2;
+    n1 = n2;
+    n2 = nextTerm;
+    cout << nextTerm << " ";
+  }
+  cout << endl;
+  return 0;
+}
+
+// Q2
+// while checks before loop, may run 0 times. do-while checks after, runs at least once. important difference!
+
+// Q3
+// switch is a multi-branch decision structure. Uses case, break, and default.
+
+// Q4
+// Short-circuit evaluation stops once result is known:  if (x != 0 && (10 / x > 1)) { ... } - Prevents division by zero. cool trick
+
+// FUNCTION METHODS
+
+// Q1
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+bool isPalindrome(const string &str)
+{
+  return equal(str.begin(), str.begin() + str.size() / 2, str.rbegin());
+  // this checks if string is same forwards and backwards
+}
+
+int main()
+{
+  cout << "madam is palindrome? " << (isPalindrome("madam") ? "true" : "false") << endl;
+  cout << "hello is palindrome? " << (isPalindrome("hello") ? "true" : "false") << endl;
+  return 0;
+}
+
+// Q2
+// C++: by value, by reference, or by pointer. Java: always by value. C++ is more flexible
+
+// Q3
+// Function overloading requires different parameters (number/type). Return type alone not enough. tried this and it didnt work
+
+// Q4
+// Recursion is a function calling itself. Base case prevents infinite recursion.
+
+// COMMENTS
+// Q1
+#include <iostream>
+using namespace std;
+
+/**
+ * Documentation comment using Doxygen/Javadoc style
+ */
+int main()
+{
+  // Single line comment
+  int x = 5; // inline comment
+
+  /*
+     Multi-line comment
+     explaining code
+  */
+  cout << "Comments example" << endl;
+  return 0;
+}
+
+// Q2
+// Comments aid maintainability and team collaboration. teacher always says this
+
+// Q3
+// Javadoc/Doxygen generate structured documentation.
+
+// Q4
+// Good code is self-documenting, but comments explain algorithms, edge cases. still learning this
+
+// CLASSES
+// Q1
+#include <iostream>
+using namespace std;
+
+class BankAccount
+{
+private:
+  double balance;
+
+public:
+  BankAccount(double initial)
+  {
+    balance = (initial >= 0) ? initial : 0;  // check if initial is positive
+  }
+  void deposit(double amount)
+  {
+    if (amount > 0)
+      balance += amount;
+  }
+  double getBalance()
+  {
+    return balance;
+  }
+};
+
+int main()
+{
+  BankAccount acc(100.5);
+  cout << "Initial: " << acc.getBalance() << endl;
+  acc.deposit(50.25);
+  cout << "After deposit: " << acc.getBalance() << endl;
+  return 0;
+}
+
+// Q2
+// Class is blueprint, object is instance. like a template
+
+// Q3
+// Public = everywhere, Private = inside class, Protected = class + derived. access modifiers
+
+// Q4
+// Constructor initializes. Default constructor = no args, auto-generated if none provided.
+
+// ENUMS
+// Q1
+#include <iostream>
+#include <string>
+using namespace std;
+
+enum class Season
+{
+  SPRING,
+  SUMMER,
+  AUTUMN,
+  WINTER
+};
+
+string recommendActivity(Season s)
+{
+  switch (s)
+  {
+  case Season::SPRING:
+    return "Plant flowers";
+  case Season::SUMMER:
+    return "Go to the beach";
+  case Season::AUTUMN:
+    return "Rake leaves";  // fixed typo
+  case Season::WINTER:
+    return "Build a snowman";
+  default:
+    return "Rest";
+  }
+}
+
+int main()
+{
+  Season now = Season::AUTUMN;
+  cout << recommendActivity(now) << endl;
+  return 0;
+}
+
+// Q2
+// Enums safer than int/string constants. prevents errors
+
+// Q3
+// Improve type safety and readability.
+
+// Q4
+// C++11 enums are strongly typed. Java enums can have fields, methods, constructors. C++ is simpler
+
+// INHERITANCE
+// Q1
+#include <iostream>
+using namespace std;
+
+class Vehicle
+{
+public:
+  void startEngine() { cout << "Engine started." << endl; }
+};
+
+class Car : public Vehicle
+{
+public:
+  void drive() { cout << "Car is moving." << endl; }
+};
+
+int main()
+{
+  Car myCar;
+  myCar.startEngine();
+  myCar.drive();
+  return 0;
+}
+
+// Q2
+// is-a = inheritance, has-a = composition. remember this rule
+
+// Q3
+// Overriding redefines method. Use virtual/override in C++, @Override in Java.
+
+// Q4
+// Diamond problem arises in multiple inheritance. C++ uses virtual inheritance, Java avoids with interfaces. confusing topic
+
+// MIXINS / INTERFACES
+// Q1
+#include <iostream>
+#include <string>
+using namespace std;
+
+class IStringable
+{
+public:
+  virtual string toString() const = 0;
+  virtual ~IStringable() = default;
+};
+
+class Printable
+{
+public:
+  void print(const IStringable &obj)
+  {
+    cout << obj.toString() << endl;
+  }
+};
+
+class Book : public IStringable
+{
+private:
+  string title, author;
+
+public:
+  Book(string t, string a) : title(t), author(a) {}
+  string toString() const override
+  {
+    return "'" + title + "' by " + author;
+  }
+};
+
+int main()
+{
+  Book b("The Hobbit", "J.R.R. Tolkien");
+  Printable p;
+  p.print(b);
+  return 0;
+}
+
+// Q2
+// Mixins/interfaces add reusable behavior without strict inheritance. more flexible than inheritance
+
+// Q3
+// Java default methods act like mixins.
+
+// Q4
+// Inheritance = simple but rigid, Composition = flexible, Mixins = reusable but can complicate. trade-offs everywhere
+
+// POLYMOPRHISM
+// Q1
+#include <iostream>
+#include <vector>
+#include <memory>
+using namespace std;
+
+class Shape
+{
+public:
+  virtual double getArea() const = 0;
+  virtual ~Shape() = default;
+};
+
+class Rectangle : public Shape
+{
+  double w, h;
+
+public:
+  Rectangle(double width, double height) : w(width), h(height) {}
+  double getArea() const override { return w * h; }
+};
+
+class Circle : public Shape
+{
+  double r;
+
+public:
+  Circle(double radius) : r(radius) {}
+  double getArea() const override { return 3.14159 * r * r; }  // pi * r^2
+};
+
+int main()
+{
+  vector<unique_ptr<Shape>> shapes;
+  shapes.push_back(make_unique<Rectangle>(10, 5));
+  shapes.push_back(make_unique<Circle>(3));
+
+  for (const auto &s : shapes)
+  {
+    cout << "Area: " << s->getArea() << endl;
+  }
+  return 0;
+}
+
+// Q2
+// Compile-time (overloading), Runtime (overriding). two different types
+
+// Q3
+// Abstract class = can mix methods. Interface = pure virtual.
+
+// Q4
+// Used for polymorphism by defining contracts. like a promise
+
+// ASYNC OPERATIONS
+// Q1
+#include <iostream>
+#include <future>
+using namespace std;
+
+long long calculateSum()
+{
+  long long sum = 0;
+  for (long long i = 1; i <= 1000000; ++i)
+  {
+    sum += i;  // add each number to sum
+  }
+  return sum;
+}
+
+int main()
+{
+  cout << "Main thread: starting calculation..." << endl;
+  future<long long> result = async(launch::async, calculateSum);
+
+  cout << "Main thread: waiting for result..." << endl;
+  cout << "Result: " << result.get() << endl;
+  return 0;
+}
+
+// Q2
+// Async solves blocking from I/O. makes programs faster
+
+// Q3
+// Parallel = simultaneous, Concurrent = interleaved.
+
+// Q4
+// Future/Promise manage results of async operations. handles the waiting
+
+// EXCEPTIONS
+// Q1
+#include <iostream>
+#include <stdexcept>
+using namespace std;
+
+void processAge(int age)
+{
+  if (age < 0)
+    throw invalid_argument("Age cannot be negative.");
+  cout << "Age is: " << age << endl;
+}
+
+int main()
+{
+  try
+  {
+    processAge(-5);
+  }
+  catch (const invalid_argument &e)
+  {
+    cerr << "Error: " << e.what() << endl;
+  }
+  cout << "Program continues..." << endl;
+  return 0;
+}
+
+// Q2
+// try = risky code, catch = handle, finally = always runs. C++ uses RAII instead of finally. RAII is better
+
+// Q3
+// Java has checked & unchecked. C++ treats all as unchecked. C++ is simpler here
+
+// Q4
+// Exceptions separate normal/error logic, but overuse can hurt readability.
+// learned this from the textbook
